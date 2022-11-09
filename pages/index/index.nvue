@@ -1,0 +1,255 @@
+<template>
+	<view style="flex: 1">
+		<view class="header">
+			<!-- 背景图片 -->
+			<image src="/static/img/index/bgc@2x.png" class="bgc"></image>
+			<!-- 顶部占位容器 -->
+			<view :style="{height:statusBarHeight+'px'}"></view>
+			<!-- 设置按钮 -->
+			<view class="tools-top">
+				<view class="setting" @tap="navigateTo()">
+					<image class="setting-image" src="@/static/img/index/setting@2x.png"></image>
+				</view>
+			</view>
+			<view class="fdr user-info" style="">
+				<view style="margin:0rpx 30rpx;">
+					<u-avatar :src="userInfo.avatarUrl?userInfo.avatarUrl:''"
+						size="120">
+					</u-avatar>
+				</view>
+
+				<view class="user-text-page">
+					<view class="fdr" style="width:480rpx">
+						<text class="font-1">欢迎你，</text>
+						<text class="font-1">{{userInfo.realName}}</text>
+					</view>
+					<view class="fdr">
+						<view class="fdr">
+							<text class="font-2">待处理告警：</text>
+							<text class="font-2">{{this.warn}}</text>
+						</view>
+						<view class="fdr" style="margin-left: 73rpx;">
+							<text class="font-2">待处理工单：</text>
+							<text class="font-2">{{this.workOrder}}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<tab-bar :tabList="tabList"></tab-bar>
+	</view>
+</template>
+
+<script>
+	// 首页
+	import tabBar from './components/custom-tab-bar.nvue'
+	import * as api from '@/api/giveAnalarm.js'
+	import config from "@/config.js"
+	import {
+		dictinit
+	} from "@/api/dict.js"
+	import aptMinx from "@/mixins/applet-compatibility.js"
+	export default {
+		mixins: [aptMinx],
+		data() {
+			return {
+				pending: '0',
+				processed: '0',
+				warn: 0,
+				workOrder: 0,
+				tabList: [{
+						icon: 'icon-emotion',
+						url: '/static/img/index/device@2x.png',
+						width: '79.91rpx',
+						height: '77.06rpx',
+						text: '我的设备',
+						route: '../equipment/index',
+					}, {
+						icon: 'icon-emotion',
+						width: '80.07rpx',
+						height: '81.22rpx',
+						url: '/static/img/index/map@2x.png',
+						text: '电子地图',
+						route: '../electron-map/index',
+					}, {
+						icon: 'icon-emotion',
+						url: '/static/img/index/give-an-alarm@2x.png',
+						width: '102.44rpx',
+						height: '81.74rpx',
+						text: '告警管理',
+						route: '../../pagesA/alarm-center/index',
+					}, {
+						icon: 'icon-emotion',
+						url: '/static/img/index/work-oder@2x.png',
+						width: '82.56rpx',
+						height: '76.1rpx',
+						text: '工单管理',
+						route: '../../pagesA/work-order/work-order/index',
+					},
+					{
+						icon: 'icon-emotion',
+						url: '/static/img/index/videotape@2x.png',
+						width: '97.78rpx',
+						height: '73.73rpx',
+						text: '录像回放',
+						route: '../playback/index',
+					},
+					{
+						icon: 'icon-emotion',
+						url: '/static/img/index/cloud@2x.png',
+						width: '118.95rpx',
+						height: '69.06rpx',
+						text: '云端库',
+						route: '../../pagesA/cloud-library/cloud-library/index',
+					}
+				],
+			}
+		},
+		components: {
+			tabBar
+		},
+		onInit() {
+		},
+		onLoad() {
+			// 字典值缓存
+			dictinit();
+			api.getWarnWorkOrder({}).then(res => {
+				this.warn = res.data.data.warn
+				this.workOrder = res.data.data.workOrder
+			});
+			// 每隔1s执行一次，app是否属于假死
+			// let setval = ()=>{
+			// 	setTimeout(()=>{
+			// 		console.log('监听app活动状态！');
+			// 		setval()
+			// 	},1000)
+			// }
+			// setval()
+		},
+		computed:{
+			userInfo(){
+				return uni.$store.state.userInfo
+			}
+		},
+		// 监听用户下拉动作
+		onPullDownRefresh() {
+			const http = [uni.$store.dispatch('getUserInfo'), api.getWarnWorkOrder()]
+			Promise.all(http).then(res => {
+				const data = res[1].data.data
+				this.warn = data.warn
+				this.workOrder = data.workOrder
+			}).finally(() => {
+				uni.stopPullDownRefresh()
+			})
+		},
+		methods: {
+			navigateTo() {
+				uni.navigateTo({
+					url: '../setting/setting'
+				})
+			}
+		},
+	}
+</script>
+
+<style>
+	/* #ifdef H5 */
+	.fdr {
+		flex-direction: row;
+	}
+
+	/* #endif */
+</style>
+<style lang="scss" scoped>
+	.header {
+		width: 750rpx;
+		height: 452rpx;
+		position: relative;
+	}
+
+	.bgc {
+		width: 750rpx;
+		height: 452rpx;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	/* #ifdef APP-PLUS */
+	.tools-top {
+		width: 750rpx;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+	}
+
+	.setting {
+		padding: 30rpx;
+	}
+
+	/* #endif */
+
+	/* #ifdef H5 */
+	.tools-top {
+		align-items: end;
+		flex-wrap: unset;
+	}
+
+	/* #endif */
+
+	/* #ifdef MP-WEIXIN */
+	.tools-top {
+		padding-right: 170rpx;
+		justify-content: flex-end !important;
+		margin-top: 15rpx;
+	}
+
+	/* #endif */
+
+	.setting-image {
+		width: 40rpx;
+		height: 36rpx;
+	}
+
+	/* #ifdef APP-PLUS */
+	.user-info {
+		width: 750rpx;
+		margin-top: 30rpx;
+	}
+
+	/* #endif */
+
+	/* #ifdef H5 */
+	.user-info {
+		width: 750rpx;
+		margin-top: 30rpx;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: unset;
+	}
+
+	/* #endif */
+
+	.user-text-page {
+		display: flex;
+		justify-content: center;
+	}
+
+	.font-1 {
+		font-size: 34rpx;
+		font-family: PingFang SC;
+		font-weight: 400;
+		line-height: 48rpx;
+		color: #FFFFFF;
+		opacity: 1;
+	}
+
+	.font-2 {
+		font-size: 28rpx;
+		font-family: PingFang SC;
+		font-weight: 500;
+		line-height: 40rpx;
+		color: #FFFFFF;
+		opacity: 1;
+	}
+</style>

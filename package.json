@@ -1,0 +1,18 @@
+{
+    "id": "zhspglpt",
+    "name": "综合视频管理平台",
+    "version": "1.3.0",
+    "description": "综合视频管理平台",
+    "keywords": [
+        "综合视频管理平台"
+    ],
+    "dependencies": {
+        "@amap/amap-jsapi-loader": "^1.0.1",
+        "@tweenjs/tween.js": "^18.6.4",
+        "axios": "^0.27.2",
+        "dayjs": "^1.11.0",
+        "jquery": "^3.6.0",
+        "video.js": "^7.19.2",
+        "vuex-persistedstate": "^4.1.0"
+    }
+}

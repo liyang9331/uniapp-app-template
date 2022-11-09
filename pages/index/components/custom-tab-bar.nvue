@@ -1,0 +1,57 @@
+<template>
+	<view class="tab-bar-group">
+		<!-- 循环tabbar -->
+		<view v-for="(item,index) in tabList" :key="index" class="tab-bar" @tap="switchTab(item.route)">
+			<view class="flex">
+				<image :src="item.url" class="icon" :style="{'width':item.width,'height':item.height}"></image>
+				<text>{{item.text}}</text>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		props: {
+			tabList: {
+				type: Array,
+				default: []
+			}
+		},
+		data() {
+			return {}
+		},
+		methods: {
+			switchTab(route) {
+				uni.navigateTo({
+					url: route
+				})
+			},
+		},
+	}
+</script>
+<style lang="scss" scoped>
+	.tab-bar-group {
+		width: 750rpx;
+		flex-direction: row;
+		display: flex;
+		flex-wrap: wrap;
+		margin-top: -114rpx;
+		align-items: center;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+
+	.flex {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 290rpx;
+		height: 290rpx;
+		background: rgb(255, 255, 255);
+		box-shadow: 0px 0px 6rpx rgba(0, 0, 0, 0.08);
+		opacity: 1;
+		border-radius: 20rpx;
+		margin-bottom: 40rpx;
+	}
+</style>

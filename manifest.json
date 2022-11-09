@@ -1,0 +1,191 @@
+{
+    "name" : "综合视频管理平台",
+    "appid" : "__UNI__AE6A888",
+    "description" : "专业的监控视频综合管控平台",
+    "versionName" : "1.4.3",
+    "versionCode" : 2022090110,
+    "transformPx" : false,
+    "compatConfig" : {
+        "MODE" : 2 // 2代表兼容Vue2模式，3代表非兼容Vue2模式
+    },
+    "app-plus" : {
+        // "statusbar": {
+        // 	"immersed": false
+        // },
+        "compatible" : {
+            "ignoreVersion" : true //true表示忽略版本检查提示框，HBuilderX1.9.0及以上版本支持  
+        },
+        "usingComponents" : true,
+        "compilerVersion" : 3,
+        /* 5+App特有相关 */
+        "modules" : {
+            "Geolocation" : {},
+            "VideoPlayer" : {},
+            "Push" : {}
+        },
+        "runmode" : "liberate",
+        /* 模块配置 */
+        "distribute" : {
+            /* 应用发布信息 */
+            "android" : {
+                /* android打包配置 */
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                ],
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a" ],
+                "schemes" : "discoverynew"
+            },
+            "ios" : {
+                "privacyDescription" : {
+                    "NSLocationAlwaysAndWhenInUseUsageDescription" : "我们需要访问位置的权限，才能为您提供地图服务",
+                    "NSPhotoLibraryUsageDescription" : "我们需要相册权限，才能保存或修改您的头像",
+                    "NSCameraUsageDescription" : "我们需要相机权限，才能拍摄图片保存为您的头像",
+                    "NSLocationAlwaysUsageDescription" : "我们需要后台访问位置的权限，才能为您提供地图服务",
+                    "NSPhotoLibraryAddUsageDescription" : "我们需要相册权限，才能保存或修改您的头像",
+                    "NSLocationWhenInUseUsageDescription" : "我们需要运行期访问位置的权限，才能为您提供地图服务",
+                    "NSMicrophoneUsageDescription" : "我们需要麦克风的权限，才能为您提供云对讲服务"
+                },
+                "idfa" : true,
+                "dSYMs" : false
+            },
+            /* ios打包配置 */
+            "sdkConfigs" : {
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "6baff57b6424ce03fb2b76f96e82a006",
+                        "appkey_android" : "4ce701d5d55b7c023b9c246e298ba827"
+                    }
+                },
+                "ad" : {},
+                "geolocation" : {
+                    "amap" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appkey_ios" : "6baff57b6424ce03fb2b76f96e82a006",
+                        "appkey_android" : "4ce701d5d55b7c023b9c246e298ba827"
+                    }
+                },
+                "push" : {}
+            },
+            "nvueStyleCompiler" : "uni-app",
+            "splashscreen" : {
+                "androidStyle" : "common",
+                "useOriginalMsgbox" : true,
+                "android" : {
+                    "hdpi" : "C:/Users/liyang/Desktop/shadow_203334.9.png",
+                    "xhdpi" : "C:/Users/liyang/Desktop/shadow_203334.9.png",
+                    "xxhdpi" : "C:/Users/liyang/Desktop/shadow_203334.9.png"
+                },
+                "iosStyle" : "common"
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "unpackage/res/icons/72x72.png",
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/icons/1024x1024.png",
+                    "ipad" : {
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                    },
+                    "iphone" : {
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    }
+                }
+            }
+        },
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : false,
+            "waiting" : false,
+            "autoclose" : true,
+            "delay" : 0
+        }
+    },
+    /* SDK配置 */
+    "quickapp" : {},
+    /* 快应用特有相关 */
+    "mp-weixin" : {
+        "appid" : "wx3fd4bed6a174d331",
+        "setting" : {
+            "urlCheck" : false,
+            "es6" : false
+        },
+        "usingComponents" : true,
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "你的位置信息将用于小程序位置接口的效果展示"
+            }
+        },
+        // 开启分包优化
+        "optimization" : {
+            "subPackages" : true
+        }
+    },
+    "vueVersion" : "2",
+    // 各类网络请求的超时时间，单位均为毫秒。
+    "networkTimeout" : {
+        "request" : 60000,
+        "connectSocket" : 60000,
+        "uploadFile" : 60000,
+        "downloadFile" : 60000
+    },
+    "h5" : {
+        "sdkConfigs" : {
+            "maps" : {
+                "qqmap" : {
+                    "key" : "6XWBZ-ZXO6D-ZRZ47-HKETZ-PLUK5-KYBDA"
+                }
+            }
+        },
+        "optimization" : {
+            "prefetch" : true, //资源预取
+            "preload" : true, //资源预加载
+            "treeShaking" : {
+                //摇树优化，根据项目需求，动态打包框架所需的组件及API，保持框架代码最精简化，参考treeShaking
+                "enable" : true
+            }
+        },
+        "router" : {
+            "mode" : "hash",
+            "base" : "./"
+        },
+        "title" : "智能视频综合管理平台",
+        "template" : "index.html"
+    },
+    "locale" : "zh-Hans",
+    "fallbackLocale" : "zh-Hans"
+}
